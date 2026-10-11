@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumié — Home & Lifestyle</title>
+<meta name="description" content="Lumié — small things make your day brighter. Candles, diffusers and home décor inspired by nature and everyday comfort.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FBF7EF;
+  --cream:#F4EDE0;
+  --beige:#EADFCC;
+  --sage:#A9B8A3;
+  --sage-deep:#6E8370;
+  --pink:#DDB9B1;
+  --pink-soft:#EFD8D2;
+  --ink:#4B463F;
+  --ink-soft:#7A736A;
+  --line:#E6DCCB;
+  --radius:28px;
+  --ease:cubic-bezier(.22,.7,.25,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.hand{font-family:'Caveat',cursive;font-weight:500}
+.wrap{width:min(1180px,100% - 48px);margin-inline:auto}
+section{padding:clamp(72px,11vw,140px) 0}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* nav */
+header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(251,247,239,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .4s;
+}
+header.scrolled{border-color:var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{height:28px;width:auto;display:block;color:var(--ink);transition:color .4s}
+.logo:hover svg{color:var(--sage-deep)}
+.logo.footer-logo svg{height:64px}
+.hero-logo{display:block;width:clamp(180px,24vw,260px);height:auto;color:var(--ink);margin-bottom:30px}
+nav ul{display:flex;gap:38px;list-style:none;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase}
+nav ul a{position:relative;padding:4px 0;color:var(--ink-soft);transition:color .3s}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--sage-deep);transition:width .4s var(--ease)}
+nav ul a:hover{color:var(--ink)}
+nav ul a:hover::after{width:100%}
+.cart{font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* hero */
+.hero{padding-top:clamp(40px,6vw,80px);position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,6vw,90px);align-items:center}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:22px;display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:36px;height:1px;background:var(--sage-deep)}
+.hero h1{font-family:'Caveat',cursive;font-weight:500;font-size:clamp(3.4rem,8vw,6.4rem);line-height:.95;color:var(--ink);letter-spacing:-.5px}
+.hero h1 span{color:var(--sage-deep)}
+.hero h1 .wave{display:block;width:150px;margin-top:10px}
+.hero p.lead{margin-top:28px;max-width:420px;color:var(--ink-soft);font-size:1.05rem}
+.btns{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:15px 34px;border-radius:999px;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--sage-deep);color:var(--ivory);transition:transform .4s var(--ease),background .3s;
+}
+.btn:hover{transform:translateY(-3px);background:#5f7461}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--sage)}
+.btn.ghost:hover{background:var(--cream)}
+
+.hero-art{position:relative}
+.arch{
+  position:relative;aspect-ratio:4/5;border-radius:999px 999px 36px 36px;overflow:hidden;background:var(--pink-soft);
+}
+.arch svg{position:absolute;inset:0;width:100%;height:100%}
+.blob{position:absolute;z-index:-1;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;filter:none}
+.blob.b1{width:60%;aspect-ratio:1;background:var(--beige);right:-14%;top:-6%;animation:morph 18s ease-in-out infinite}
+.blob.b2{width:38%;aspect-ratio:1;background:#DCE4D6;left:-10%;bottom:6%;animation:morph 22s ease-in-out infinite reverse}
+@keyframes morph{
+  0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}
+  50%{border-radius:42% 58% 40% 60%/58% 42% 58% 42%}
+}
+.note{
+  position:absolute;left:-26px;bottom:48px;background:var(--ivory);border:1px solid var(--line);
+  padding:14px 22px;border-radius:20px;font-family:'Caveat',cursive;font-size:1.5rem;line-height:1.1;color:var(--sage-deep);
+  transform:rotate(-4deg);animation:float 7s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-8px)}}
+.flame{transform-origin:50% 100%;animation:flicker 3.2s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1,1)}30%{transform:scale(.94,1.06)}60%{transform:scale(1.04,.96)}}
+.sway{transform-origin:50% 100%;animation:sway 9s ease-in-out infinite}
+.sway.s2{animation-duration:11s;animation-delay:-3s}
+@keyframes sway{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.8deg)}}
+
+/* section headings */
+.head{text-align:center;max-width:560px;margin:0 auto clamp(44px,6vw,76px)}
+.head .hand{font-size:1.7rem;color:var(--pink);color:#C99A91;display:block;line-height:1;margin-bottom:8px}
+.head h2{font-weight:300;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;letter-spacing:-.01em}
+.head p{margin-top:16px;color:var(--ink-soft)}
+
+/* featured */
+.featured{background:var(--cream);border-radius:60px 60px 0 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{display:block}
+.card .img{
+  aspect-ratio:4/5;border-radius:var(--radius);display:grid;place-items:center;position:relative;overflow:hidden;
+  transition:transform .8s var(--ease);
+}
+.card:nth-child(1) .img{background:var(--pink-soft);border-radius:200px 200px var(--radius) var(--radius)}
+.card:nth-child(2) .img{background:#DCE4D6}
+.card:nth-child(3) .img{background:var(--beige);border-radius:var(--radius) var(--radius) 200px 200px}
+.card .img svg.item{width:62%;transition:transform .8s var(--ease)}
+.card:hover .img svg.item{transform:translateY(-8px) scale(1.03)}
+.card .leafbg{position:absolute;width:46%;opacity:.55;right:-6%;bottom:-4%}
+.card h3{margin-top:22px;font-weight:400;font-size:1.2rem;display:flex;justify-content:space-between;align-items:baseline}
+.card h3 em{font-style:normal;font-family:'Caveat',cursive;font-size:1.4rem;color:var(--sage-deep);transition:transform .4s var(--ease)}
+.card:hover h3 em{transform:translateX(6px)}
+.card p{color:var(--ink-soft);font-size:.95rem;margin-top:2px}
+
+/* story */
+.story{background:var(--cream);padding-top:0}
+.story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,7vw,110px);align-items:center;padding-top:clamp(72px,11vw,140px)}
+.story-art{position:relative;aspect-ratio:1;max-width:520px;width:100%}
+.story-art .shape{position:absolute;inset:0;background:#DCE4D6;border-radius:58% 42% 50% 50%/46% 54% 46% 54%;animation:morph 20s ease-in-out infinite}
+.story-art svg{position:absolute;inset:0;width:100%;height:100%}
+.story h2{font-weight:300;font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.2;margin:6px 0 24px}
+.story .hand.tag{font-size:1.7rem;color:#C99A91;line-height:1}
+.story p{color:var(--ink-soft);margin-bottom:18px;max-width:470px}
+.values{display:flex;gap:34px;margin-top:34px;flex-wrap:wrap}
+.values div{display:flex;flex-direction:column}
+.values .hand{font-size:1.9rem;color:var(--sage-deep);line-height:1.1}
+.values small{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.sig{font-family:'Caveat',cursive;font-size:2.1rem;color:var(--ink);margin-top:26px;line-height:1}
+
+/* bestsellers */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px 24px}
+.prod .img{
+  aspect-ratio:1;border-radius:var(--radius);display:grid;place-items:center;position:relative;overflow:hidden;
+  background:var(--cream);transition:background .5s;
+}
+.prod:nth-child(4n+1) .img{--bg:var(--pink-soft)}
+.prod:nth-child(4n+2) .img{--bg:#DCE4D6}
+.prod:nth-child(4n+3) .img{--bg:var(--beige)}
+.prod:nth-child(4n+4) .img{--bg:#F0E4DD}
+.prod .img{background:var(--bg)}
+.prod .img svg{width:58%;transition:transform .8s var(--ease)}
+.prod:hover .img svg{transform:translateY(-6px) scale(1.04)}
+.prod .tag{position:absolute;top:16px;left:16px;font-family:'Caveat',cursive;font-size:1.2rem;background:var(--ivory);padding:0 14px;border-radius:999px;color:var(--sage-deep);line-height:1.5}
+.add{
+  position:absolute;left:50%;bottom:16px;transform:translate(-50%,14px);opacity:0;
+  background:var(--ivory);color:var(--ink);border:none;font:inherit;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:10px 22px;border-radius:999px;cursor:pointer;transition:all .5s var(--ease);
+}
+.prod:hover .add,.add:focus-visible{opacity:1;transform:translate(-50%,0)}
+.add:hover{background:var(--sage-deep);color:var(--ivory)}
+.prod h3{margin-top:16px;font-weight:400;font-size:1rem}
+.prod .meta{display:flex;justify-content:space-between;color:var(--ink-soft);font-size:.92rem}
+.more{text-align:center;margin-top:60px}
+
+/* quote band */
+.band{padding:clamp(60px,8vw,100px) 0;background:var(--sage-deep);color:var(--ivory);text-align:center;border-radius:60px;margin:0 clamp(12px,2vw,28px)}
+.band q{display:block;font-family:'Caveat',cursive;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.2;max-width:760px;margin:0 auto;quotes:none;font-weight:500}
+.band span{display:block;margin-top:18px;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+
+/* footer */
+footer{padding:clamp(70px,9vw,110px) 0 36px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:48px;align-items:start}
+.foot p{color:var(--ink-soft);max-width:300px;margin-top:12px;font-size:.95rem}
+.foot h4{font-weight:400;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sage-deep);margin-bottom:16px}
+.foot li{list-style:none;color:var(--ink-soft);font-size:.95rem;margin-bottom:6px}
+.foot a{transition:color .3s}
+.foot a:hover{color:var(--sage-deep)}
+.social{display:flex;gap:14px;margin-top:6px}
+.social a{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:all .4s var(--ease)}
+.social a:hover{background:var(--pink-soft);border-color:var(--pink-soft);transform:translateY(-3px)}
+.social svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.legal{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.82rem;color:var(--ink-soft)}
+
+/* responsive */
+@media (max-width:980px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  nav ul{display:none}
+}
+@media (max-width:820px){
+  .hero .wrap,.story .wrap{grid-template-columns:1fr}
+  .hero-art{max-width:480px;margin-inline:auto;width:100%}
+  .cards{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot>div:first-child{grid-column:1/-1}
+  .note{left:0}
+  .story-art{margin-inline:auto}
+  .featured{border-radius:36px 36px 0 0}
+  .band{border-radius:36px}
+}
+@media (max-width:520px){
+  .grid{gap:28px 14px}
+  .add{opacity:1;transform:translate(-50%,0);padding:8px 14px;font-size:.68rem}
+  .prod .tag{font-size:1rem;top:10px;left:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- Reusable illustrations -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Lumié logo -->
+    <symbol id="lumie-logo" viewBox="0 0 312.54 90.91">
+      <g fill="currentColor">
+        <path d="M1.5,90.91c-.27,0-.55-.1-.75-.26-.57-.48-1.91-1.61,1.39-24.86C5.62,41.39,20.21,1.06,20.36.66c.19-.52.76-.79,1.28-.6.52.19.79.76.6,1.28-.15.4-14.66,40.54-18.11,64.73-2.25,15.82-2.23,20.94-2.06,22.55,6.9-2.66,40.01-15.19,46.49-13.52.53.14.86.68.72,1.22-.14.54-.68.86-1.22.72-5.26-1.35-35.14,9.52-46.21,13.82-.11.04-.22.06-.34.06ZM2.2,89.31h0,0Z"/>
+        <path d="M74.72,77.46c-.72,0-1.42-.12-2.11-.36-1.92-.68-3.39-2.1-4.35-4.2-5.44-11.83,6.52-43.21,7.03-44.54.2-.52.78-.77,1.29-.57.52.2.77.78.57,1.29-.12.32-12.17,31.92-7.08,42.98.74,1.62,1.79,2.65,3.21,3.15,10.05,3.6,26.96-31.1,32.63-44.76.2-.48.72-.73,1.21-.57.49.15.79.65.69,1.15-3.05,15.35-6.67,40.71-3.41,43.43.42.35.48.98.13,1.41-.35.42-.98.48-1.41.13-3.94-3.29-1.02-24.25,1.16-36.89-6.2,13.44-19.11,38.35-29.56,38.36Z"/>
+        <path d="M131.09,76.31c-.08,0-.16,0-.24-.03-.49-.12-.81-.58-.76-1.08.04-.33,3.51-32.85,2.83-40.8-.06-.76-.25-.92-.26-.93-1.38-.51-7.85,6.49-13.6,14.72-.32.45-.94.56-1.39.25-.45-.32-.56-.94-.25-1.39,3.49-5,12.01-16.5,15.75-15.5.7.19,1.57.81,1.73,2.69.5,5.86-1.11,23.94-2.11,34.1,2.03-4.96,5.01-12.07,8.25-19.12,12.06-26.26,15.83-26.08,17.25-26.04,1.32.06,2.28,1.05,2.84,2.96,3.18,10.81,3.47,25.13,3.38,32.47,4.67-9.6,15.65-30.81,21.71-31.25.8-.06,1.93.16,2.82,1.53,5.49,8.48,2.19,42.15,2.04,43.58-.05.55-.53.94-1.09.9-.55-.06-.95-.54-.9-1.09.03-.34,3.38-34.4-1.73-42.29-.38-.58-.71-.63-.99-.62-4.68.33-16.03,21.27-22.08,34.39-.2.43-.68.67-1.15.55-.47-.12-.78-.54-.76-1.02.01-.22,1.1-22.05-3.17-36.58-.28-.94-.65-1.51-1-1.53-4.05-.15-16.52,25.54-26.2,50.5-.15.39-.53.64-.93.64Z"/>
+        <path d="M219.76,78.84c-.46,0-.88-.32-.98-.79-2.68-12.44,7.64-45.5,8.08-46.9.17-.53.73-.82,1.25-.65.53.17.82.73.65,1.25-.11.34-10.61,33.95-8.04,45.87.12.54-.23,1.07-.77,1.19-.07.02-.14.02-.21.02Z"/>
+        <circle cx="231.86" cy="13.53" r="1.61"/>
+        <path d="M274.04,81.94c-2.02,0-3.76-.17-5.08-.53-10.73-2.88-13.66-15.35-14.43-20.58l-.03-.19c-.36-2.24-.45-4.4-.32-6.49-4.25-.93-7.79-2.35-9.98-3.36-.5-.23-.72-.83-.49-1.33.23-.5.82-.72,1.33-.49,2.06.95,5.37,2.28,9.35,3.18,1.25-9.1,6.71-16.34,11.95-20.32,2.38-1.81,9.63-7.31,16.65-4.61.55.21,5.43,2.2,6.58,6.7,1.75,6.87-6.7,14.37-12.81,17.74-6.91,3.81-14.34,3.95-20.57,2.89-.12,1.88-.03,3.81.28,5.77l.03.22c.71,4.84,3.38,16.37,12.97,18.94,5.55,1.49,22.97-.77,32.2-7.8,1.35-1.03,2.65-1.97,3.86-2.85,2.14-1.56,3.99-2.91,5.33-4.14.41-.37,1.04-.35,1.41.06s.35,1.04-.06,1.41c-1.42,1.31-3.31,2.69-5.51,4.28-1.2.87-2.48,1.81-3.82,2.83-7.44,5.67-20.5,8.67-28.85,8.67ZM256.4,52.56c5.9,1.03,12.92.92,19.41-2.65,5.35-2.95,13.3-9.76,11.83-15.49-.92-3.58-5.18-5.26-5.36-5.33-5.98-2.3-12.56,2.69-14.72,4.34-5.24,3.98-10.03,10.97-11.16,19.13Z"/>
+        <path d="M279.13,16.17c-.31,0-.62-.15-.82-.42-.32-.45-.21-1.08.24-1.39l8.37-5.9c.45-.32,1.07-.21,1.39.24.32.45.21,1.08-.24,1.39l-8.37,5.9c-.17.12-.38.18-.58.18Z"/>
+      </g>
+    </symbol>
+    <!-- Candle in jar -->
+    <symbol id="candle" viewBox="0 0 200 220">
+      <ellipse cx="100" cy="206" rx="64" ry="8" fill="#4B463F" opacity=".07"/>
+      <g class="flame"><path d="M100 24c10 14 12 24 0 34-12-10-10-20 0-34z" fill="#F0C98A"/><path d="M100 36c5 7 6 12 0 17-6-5-5-10 0-17z" fill="#FBE8C4"/></g>
+      <rect x="98" y="56" width="4" height="22" rx="2" fill="#6b6258"/>
+      <rect x="40" y="76" width="120" height="30" rx="8" fill="var(--b,#6E8370)"/>
+      <rect x="44" y="96" width="112" height="104" rx="16" fill="var(--a,#F4EDE0)" stroke="var(--b,#6E8370)" stroke-opacity=".25"/>
+      <rect x="62" y="124" width="76" height="50" rx="6" fill="#FBF7EF" opacity=".8"/>
+      <path d="M100 130c-9 8-9 18 0 24 9-6 9-16 0-24z" fill="none" stroke="var(--b,#6E8370)" stroke-width="1.5"/>
+      <path d="M100 154v14" stroke="var(--b,#6E8370)" stroke-width="1.5"/>
+      <path d="M100 160c-6-1-10-4-12-8M100 160c6-1 10-4 12-8" stroke="var(--b,#6E8370)" stroke-width="1.5" fill="none"/>
+    </symbol>
+    <!-- Reed diffuser -->
+    <symbol id="diffuser" viewBox="0 0 200 220">
+      <ellipse cx="100" cy="206" rx="52" ry="7" fill="#4B463F" opacity=".07"/>
+      <g stroke="#B79B77" stroke-width="3" stroke-linecap="round">
+        <path d="M98 100L58 22"/><path d="M100 100L88 12"/><path d="M102 100L116 10"/><path d="M104 100L146 26"/><path d="M96 100L72 18"/>
+      </g>
+      <rect x="84" y="88" width="32" height="22" rx="5" fill="var(--b,#C99A91)"/>
+      <path d="M84 110c-34 14-42 40-42 66 0 18 14 30 58 30s58-12 58-30c0-26-8-52-42-66z" fill="var(--a,#EFD8D2)" stroke="var(--b,#C99A91)" stroke-opacity=".35"/>
+      <rect x="72" y="150" width="56" height="34" rx="4" fill="#FBF7EF" opacity=".85"/>
+      <circle cx="100" cy="167" r="8" fill="none" stroke="var(--b,#C99A91)" stroke-width="1.4"/>
+    </symbol>
+    <!-- Vase with stems -->
+    <symbol id="vase" viewBox="0 0 200 220">
+      <ellipse cx="100" cy="206" rx="46" ry="7" fill="#4B463F" opacity=".07"/>
+      <g class="sway"><path d="M100 110C96 70 86 44 66 22" stroke="#7E9380" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <g fill="#8FA58F"><ellipse cx="74" cy="36" rx="9" ry="14" transform="rotate(-38 74 36)"/><ellipse cx="86" cy="62" rx="8" ry="13" transform="rotate(30 86 62)"/><ellipse cx="62" cy="58" rx="8" ry="13" transform="rotate(-50 62 58)"/></g></g>
+      <g class="sway s2"><path d="M100 110C106 74 122 44 146 28" stroke="#7E9380" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <g fill="#A9B8A3"><ellipse cx="138" cy="38" rx="9" ry="14" transform="rotate(42 138 38)"/><ellipse cx="118" cy="66" rx="8" ry="13" transform="rotate(-28 118 66)"/><ellipse cx="148" cy="64" rx="8" ry="13" transform="rotate(52 148 64)"/></g></g>
+      <path d="M100 110C104 80 100 54 100 26" stroke="#7E9380" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="100" cy="22" r="7" fill="#DDB9B1"/>
+      <path d="M78 104h44c0 8 20 18 20 52 0 30-14 46-42 46s-42-16-42-46c0-34 20-44 20-52z" fill="var(--a,#F4EDE0)" stroke="var(--b,#B79B77)" stroke-opacity=".4"/>
+      <path d="M62 150c22 10 54 10 76 0" stroke="var(--b,#B79B77)" stroke-opacity=".5" fill="none" stroke-width="1.4"/>
+    </symbol>
+    <!-- Ceramic mug -->
+    <symbol id="mug" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="184" rx="58" ry="7" fill="#4B463F" opacity=".07"/>
+      <path d="M150 80c28-4 34 34 4 44" fill="none" stroke="var(--a,#F4EDE0)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M46 62h104v70c0 26-16 44-52 44s-52-18-52-44z" fill="var(--a,#F4EDE0)" stroke="var(--b,#6E8370)" stroke-opacity=".3"/>
+      <ellipse cx="98" cy="62" rx="52" ry="9" fill="var(--b,#6E8370)" opacity=".35"/>
+      <path d="M46 100h104" stroke="var(--b,#6E8370)" stroke-opacity=".5" stroke-width="1.4"/>
+      <path d="M76 38c-6-8 6-12 0-22M100 40c-6-8 6-12 0-24M124 38c-6-8 6-12 0-22" stroke="#B9AE9E" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".6"/>
+    </symbol>
+    <!-- Pillar candles trio -->
+    <symbol id="pillars" viewBox="0 0 200 220">
+      <ellipse cx="100" cy="206" rx="76" ry="7" fill="#4B463F" opacity=".07"/>
+      <g class="flame"><path d="M100 38c8 12 10 20 0 28-10-8-8-16 0-28z" fill="#F0C98A"/></g>
+      <rect x="98" y="62" width="4" height="14" rx="2" fill="#6b6258"/>
+      <rect x="78" y="74" width="44" height="130" rx="10" fill="var(--a,#F4EDE0)" stroke="#B79B77" stroke-opacity=".3"/>
+      <rect x="34" y="114" width="38" height="90" rx="10" fill="var(--b,#DDB9B1)"/>
+      <rect x="52" y="104" width="2.5" height="12" rx="1" fill="#6b6258"/>
+      <rect x="128" y="132" width="38" height="72" rx="10" fill="#A9B8A3"/>
+      <rect x="146" y="122" width="2.5" height="12" rx="1" fill="#6b6258"/>
+    </symbol>
+    <!-- Bowl -->
+    <symbol id="bowl" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="176" rx="72" ry="8" fill="#4B463F" opacity=".07"/>
+      <path d="M26 98h148c0 44-30 72-74 72S26 142 26 98z" fill="var(--a,#EADFCC)" stroke="var(--b,#B79B77)" stroke-opacity=".4"/>
+      <ellipse cx="100" cy="98" rx="74" ry="11" fill="var(--b,#B79B77)" opacity=".3"/>
+      <g fill="#8FA58F"><ellipse cx="72" cy="86" rx="8" ry="15" transform="rotate(-30 72 86)"/><ellipse cx="100" cy="76" rx="8" ry="16"/><ellipse cx="128" cy="86" rx="8" ry="15" transform="rotate(30 128 86)"/></g>
+      <circle cx="100" cy="64" r="7" fill="#DDB9B1"/>
+    </symbol>
+    <!-- Tray / dish -->
+    <symbol id="dish" viewBox="0 0 200 200">
+      <ellipse cx="100" cy="150" rx="78" ry="9" fill="#4B463F" opacity=".07"/>
+      <path d="M22 112c0-6 6-10 14-10h128c8 0 14 4 14 10 0 20-14 34-34 34H56c-20 0-34-14-34-34z" fill="var(--a,#F4EDE0)" stroke="var(--b,#6E8370)" stroke-opacity=".35"/>
+      <ellipse cx="100" cy="106" rx="62" ry="6" fill="var(--b,#6E8370)" opacity=".2"/>
+      <path d="M72 78l14-30 14 30-14 8z" fill="var(--b,#6E8370)" opacity=".55"/>
+      <circle cx="122" cy="84" r="16" fill="#DDB9B1"/>
+      <circle cx="122" cy="84" r="7" fill="none" stroke="#FBF7EF" stroke-width="1.4"/>
+    </symbol>
+    <!-- Linen mist bottle -->
+    <symbol id="mist" viewBox="0 0 200 220">
+      <ellipse cx="100" cy="206" rx="40" ry="6" fill="#4B463F" opacity=".07"/>
+      <rect x="88" y="22" width="30" height="16" rx="4" fill="var(--b,#6E8370)"/>
+      <path d="M108 30h26v10h-26z" fill="var(--b,#6E8370)"/>
+      <rect x="92" y="38" width="22" height="22" fill="var(--b,#6E8370)" opacity=".7"/>
+      <rect x="62" y="58" width="76" height="144" rx="20" fill="var(--a,#DCE4D6)" stroke="var(--b,#6E8370)" stroke-opacity=".3"/>
+      <rect x="74" y="104" width="52" height="56" rx="5" fill="#FBF7EF" opacity=".85"/>
+      <path d="M100 114c-8 8-8 18 0 26 8-8 8-18 0-26z" fill="none" stroke="var(--b,#6E8370)" stroke-width="1.4"/>
+      <path d="M84 148h32" stroke="var(--b,#6E8370)" stroke-width="1.4"/>
+    </symbol>
+    <!-- Leaf sprig -->
+    <symbol id="sprig" viewBox="0 0 120 200">
+      <path d="M60 196C58 150 62 90 60 8" stroke="#7E9380" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <g fill="#8FA58F">
+        <ellipse cx="42" cy="48" rx="10" ry="22" transform="rotate(-35 42 48)"/><ellipse cx="78" cy="68" rx="10" ry="22" transform="rotate(35 78 68)"/>
+        <ellipse cx="40" cy="104" rx="10" ry="24" transform="rotate(-38 40 104)"/><ellipse cx="80" cy="128" rx="10" ry="24" transform="rotate(38 80 128)"/>
+        <ellipse cx="44" cy="160" rx="9" ry="20" transform="rotate(-34 44 160)"/><ellipse cx="60" cy="14" rx="8" ry="16"/>
+      </g>
+    </symbol>
+    <!-- Wave underline -->
+    <symbol id="wave" viewBox="0 0 150 14"><path d="M2 8c12-8 24-8 36 0s24 8 36 0 24-8 36 0 24 8 36 0" fill="none" stroke="#DDB9B1" stroke-width="3" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header id="top">
+  <nav class="wrap">
+    <a href="#top" class="logo" aria-label="Lumié home">
+      <svg viewBox="0 0 312.54 90.91" role="img" aria-label="Lumié"><use href="#lumie-logo"/></svg>
+    </a>
+    <ul>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#bestsellers">Bestsellers</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#bestsellers" class="cart">Bag (0)</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <svg class="hero-logo reveal" viewBox="0 0 312.54 90.91" role="img" aria-label="Lumié"><use href="#lumie-logo"/></svg>
+        <div class="eyebrow reveal">Home &amp; Lifestyle</div>
+        <h1 class="reveal" style="--d:.1s">Small things make your day <span>brighter.</span>
+          <svg class="wave" viewBox="0 0 150 14" aria-hidden="true"><use href="#wave"/></svg>
+        </h1>
+        <p class="lead reveal" style="--d:.2s">Candles, diffusers and quiet home pieces, inspired by nature and made for everyday comfort. Slow down, light one, and stay a while.</p>
+        <div class="btns reveal" style="--d:.3s">
+          <a href="#shop" class="btn">Shop the collection</a>
+          <a href="#story" class="btn ghost">Our story</a>
+        </div>
+      </div>
+
+      <div class="hero-art reveal" style="--d:.2s">
+        <div class="blob b1"></div><div class="blob b2"></div>
+        <div class="arch" role="img" aria-label="A sunlit window ledge with a candle, a diffuser and a vase of eucalyptus">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="500" fill="#F2DDD6"/>
+            <!-- window light -->
+            <rect x="70" y="70" width="260" height="290" rx="130" fill="#FBF3E6"/>
+            <circle cx="260" cy="150" r="46" fill="#F6E3BF" opacity=".8"/>
+            <path d="M200 70v290M70 215h260" stroke="#EADFCC" stroke-width="5"/>
+            <!-- curtain -->
+            <path d="M0 0h74c-22 90-22 210 0 330H0z" fill="#EFE6D6"/>
+            <path d="M20 0c-8 100-8 220 0 330M44 0c-8 100-8 220 0 330" stroke="#E2D6C2" stroke-width="2" fill="none"/>
+            <!-- hanging leaves -->
+            <g class="sway" style="transform-origin:330px 0"><path d="M330 0v120" stroke="#7E9380" stroke-width="2"/>
+              <g fill="#8FA58F"><ellipse cx="320" cy="40" rx="8" ry="16" transform="rotate(-40 320 40)"/><ellipse cx="340" cy="70" rx="8" ry="16" transform="rotate(40 340 70)"/><ellipse cx="322" cy="100" rx="8" ry="16" transform="rotate(-40 322 100)"/></g></g>
+            <!-- shelf -->
+            <rect x="0" y="380" width="400" height="120" fill="#D9BFA1"/>
+            <rect x="0" y="372" width="400" height="14" fill="#E8D2B6"/>
+            <!-- items -->
+            <svg x="22" y="236" width="150" height="150" viewBox="0 0 200 220" style="--a:#EFD8D2;--b:#C99A91"><use href="#diffuser"/></svg>
+            <svg x="140" y="248" width="140" height="140" viewBox="0 0 200 220" style="--a:#F6EFE3;--b:#6E8370"><use href="#candle"/></svg>
+            <svg x="258" y="226" width="150" height="160" viewBox="0 0 200 220" style="--a:#FBF7EF;--b:#B79B77"><use href="#vase"/></svg>
+            <!-- warm glow -->
+            <ellipse cx="210" cy="380" rx="90" ry="14" fill="#F6E3BF" opacity=".35"/>
+          </svg>
+        </div>
+        <div class="note">warm light,<br>slow evenings</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED -->
+  <section class="featured" id="shop" style="margin-top:clamp(40px,6vw,90px)">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="hand">the collection</span>
+        <h2>Gentle essentials for every corner of home</h2>
+        <p>Thoughtfully made pieces in soft, natural tones, chosen to make the ordinary feel a little more special.</p>
+      </div>
+      <div class="cards">
+        <a href="#bestsellers" class="card reveal">
+          <div class="img" style="--a:#F6EFE3;--b:#C99A91">
+            <svg class="leafbg" viewBox="0 0 120 200" aria-hidden="true"><use href="#sprig"/></svg>
+            <svg class="item" viewBox="0 0 200 220"><use href="#candle"/></svg>
+          </div>
+          <h3>Candles <em>→</em></h3>
+          <p>Hand-poured soy, slow burning</p>
+        </a>
+        <a href="#bestsellers" class="card reveal" style="--d:.12s">
+          <div class="img" style="--a:#EFD8D2;--b:#C99A91">
+            <svg class="leafbg" viewBox="0 0 120 200" aria-hidden="true"><use href="#sprig"/></svg>
+            <svg class="item" viewBox="0 0 200 220"><use href="#diffuser"/></svg>
+          </div>
+          <h3>Diffusers <em>→</em></h3>
+          <p>Botanical scents that linger softly</p>
+        </a>
+        <a href="#bestsellers" class="card reveal" style="--d:.24s">
+          <div class="img" style="--a:#FBF7EF;--b:#B79B77">
+            <svg class="leafbg" viewBox="0 0 120 200" aria-hidden="true"><use href="#sprig"/></svg>
+            <svg class="item" viewBox="0 0 200 220"><use href="#vase"/></svg>
+          </div>
+          <h3>Home décor <em>→</em></h3>
+          <p>Ceramics and natural textures</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="wrap">
+      <div class="story-art reveal" role="img" aria-label="Illustration of botanical leaves">
+        <div class="shape"></div>
+        <svg viewBox="0 0 400 400">
+          <g transform="translate(70 90) rotate(-14 60 100)"><svg width="120" height="200" viewBox="0 0 120 200"><use href="#sprig"/></svg></g>
+          <g transform="translate(210 40) rotate(10 60 100)"><svg width="130" height="220" viewBox="0 0 120 200"><use href="#sprig"/></svg></g>
+          <g transform="translate(150 170) rotate(-4 60 100)"><svg width="110" height="190" viewBox="0 0 120 200" style="opacity:.9"><use href="#sprig"/></svg></g>
+          <circle cx="104" cy="326" r="14" fill="#DDB9B1"/><circle cx="302" cy="312" r="10" fill="#EFD8D2"/>
+          <circle cx="330" cy="120" r="8" fill="#F6E3BF"/>
+        </svg>
+      </div>
+      <div class="reveal" style="--d:.1s">
+        <span class="hand tag">our story</span>
+        <h2>Born from quiet mornings and the green outside the window</h2>
+        <p>Lumié began with a simple belief: home should feel like an exhale. We take our cues from gardens, soft light and the small rituals that make an ordinary day feel kind.</p>
+        <p>Every piece is made in small batches with plant-based waxes, natural fragrance oils and honest materials. Nothing loud, nothing hurried, just things that are lovely to live with.</p>
+        <div class="values">
+          <div><span class="hand">100%</span><small>Natural soy wax</small></div>
+          <div><span class="hand">Small</span><small>Batch poured</small></div>
+          <div><span class="hand">Kind</span><small>Recyclable packaging</small></div>
+        </div>
+        <div class="sig">with warmth, the Lumié team</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BESTSELLERS -->
+  <section id="bestsellers" style="background:var(--ivory)">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="hand">loved by many</span>
+        <h2>Our bestsellers</h2>
+        <p>The pieces our community brings home again and again.</p>
+      </div>
+      <div class="grid">
+        <article class="prod reveal">
+          <div class="img" style="--a:#F6EFE3;--b:#6E8370"><span class="tag">bestseller</span><svg viewBox="0 0 200 220"><use href="#candle"/></svg><button class="add">Add to bag</button></div>
+          <h3>Sage &amp; Linen Candle</h3>
+          <div class="meta"><span>Soy wax · 220g</span><span>$28</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.08s">
+          <div class="img" style="--a:#FBF7EF;--b:#C99A91"><svg viewBox="0 0 200 220"><use href="#diffuser"/></svg><button class="add">Add to bag</button></div>
+          <h3>Rose Petal Diffuser</h3>
+          <div class="meta"><span>Reed · 100ml</span><span>$34</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.16s">
+          <div class="img" style="--a:#FBF7EF;--b:#B79B77"><span class="tag">new</span><svg viewBox="0 0 200 220"><use href="#vase"/></svg><button class="add">Add to bag</button></div>
+          <h3>Eucalyptus Stem Vase</h3>
+          <div class="meta"><span>Stoneware</span><span>$46</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.24s">
+          <div class="img" style="--a:#FBF7EF;--b:#6E8370"><svg viewBox="0 0 200 200"><use href="#mug"/></svg><button class="add">Add to bag</button></div>
+          <h3>Morning Ceramic Mug</h3>
+          <div class="meta"><span>Hand-glazed</span><span>$24</span></div>
+        </article>
+        <article class="prod reveal">
+          <div class="img" style="--a:#F6EFE3;--b:#DDB9B1"><svg viewBox="0 0 200 220"><use href="#pillars"/></svg><button class="add">Add to bag</button></div>
+          <h3>Soft Pillar Trio</h3>
+          <div class="meta"><span>Unscented · set of 3</span><span>$32</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.08s">
+          <div class="img" style="--a:#DCE4D6;--b:#6E8370"><span class="tag">bestseller</span><svg viewBox="0 0 200 220"><use href="#mist"/></svg><button class="add">Add to bag</button></div>
+          <h3>Linen Mist</h3>
+          <div class="meta"><span>Room &amp; pillow · 120ml</span><span>$22</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.16s">
+          <div class="img" style="--a:#F6EFE3;--b:#B79B77"><svg viewBox="0 0 200 200"><use href="#bowl"/></svg><button class="add">Add to bag</button></div>
+          <h3>Garden Bowl</h3>
+          <div class="meta"><span>Ceramic</span><span>$38</span></div>
+        </article>
+        <article class="prod reveal" style="--d:.24s">
+          <div class="img" style="--a:#FBF7EF;--b:#6E8370"><svg viewBox="0 0 200 200"><use href="#dish"/></svg><button class="add">Add to bag</button></div>
+          <h3>Trinket Dish</h3>
+          <div class="meta"><span>Stoneware</span><span>$18</span></div>
+        </article>
+      </div>
+      <div class="more reveal"><a href="#shop" class="btn ghost">View all products</a></div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="band reveal">
+    <div class="wrap">
+      <q>Light a candle, open the window, let the day be gentle.</q>
+      <span>Lumié ritual</span>
+    </div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="logo footer-logo" aria-label="Lumié home">
+          <svg viewBox="0 0 312.54 90.91" role="img" aria-label="Lumié"><use href="#lumie-logo"/></svg>
+        </a>
+        <p>Small things make your day brighter.</p>
+      </div>
+      <div>
+        <h4>Say hello</h4>
+        <ul>
+          <li><a href="mailto:hello@lumie.home">hello@lumie.home</a></li>
+          <li>Mon–Fri · 9am–5pm</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow along</h4>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M11 8.5c-2.5 0-3.5 2-3.5 3.5 0 1.2.7 2 1.5 2.2M11 8.5c2 0 3 1.4 3 2.8 0 1.8-1 3.4-2.6 3.4-1 0-1.5-.7-1.5-1.4L10.5 17"/></svg></a>
+          <a href="#" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="legal"><span>© 2026 Lumié — Home &amp; Lifestyle</span><span>Made with care, in small batches</span></div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // header border on scroll
+  const header = document.querySelector('header');
+  addEventListener('scroll',()=>header.classList.toggle('scrolled', scrollY>10),{passive:true});
+
+  // bag counter
+  let count = 0;
+  const bag = document.querySelector('.cart');
+  document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{
+    count++; bag.textContent = 'Bag ('+count+')';
+    b.textContent = 'Added ✓'; setTimeout(()=>b.textContent='Add to bag',1400);
+  }));
+</script>
+</body>
+</html>
